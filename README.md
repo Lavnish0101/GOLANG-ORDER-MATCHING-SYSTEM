@@ -91,15 +91,15 @@ curl -X POST http://localhost:8080/orders \
 ```
 Fields:
 
-symbol: Stock symbol (e.g., "AAPL")
+- symbol: Stock symbol (e.g., "AAPL")
 
-side: "buy" or "sell"
+- side: "buy" or "sell"
 
-type: "limit" or "market"
+- type: "limit" or "market"
 
-price: only for limit orders
+- price: only for limit orders
 
-quantity: total units
+- quantity: total units
 
 🔹 DELETE /orders/{id} — Cancel Order
 ```bash
@@ -118,23 +118,24 @@ curl "http://localhost:8080/trades?symbol=AAPL"
 
 
 💡 Design Decisions & Assumptions
-Only open orders are shown in /orderbook endpoint.
 
-Market orders are matched immediately and never sit in the order book.
+- Only open orders are shown in /orderbook endpoint.
 
-Matching uses price-time priority:
+- Market orders are matched immediately and never sit in the order book.
 
-Best price first (buy: highest bid, sell: lowest ask)
+- Matching uses price-time priority:
 
-FIFO within same price level
+- Best price first (buy: highest bid, sell: lowest ask)
 
-Matching engine and DB operations are fully transactional
+- FIFO within same price level
 
-No ORMs used — only raw SQL
+- Matching engine and DB operations are fully transactional
 
-Matching is triggered only when a new order is placed
+- No ORMs used — only raw SQL
 
-No concurrency control for simultaneous placements (can be extended with mutex or DB locks)
+- Matching is triggered only when a new order is placed
+
+- No concurrency control for simultaneous placements (can be extended with mutex or DB locks)
 
 📦 Directory Structure
 ```bash
