@@ -74,6 +74,7 @@ go run cmd/main.go
 Server runs at: http://localhost:8080
 
 🧪 API Endpoints
+
 All APIs use JSON format.
 
 🔹 POST /orders — Place Order
